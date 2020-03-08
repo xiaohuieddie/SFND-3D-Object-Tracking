@@ -272,10 +272,10 @@ IMAGE               | Description
 ![alt text](/Result/TTC_Camera2.png) | TTC from Camera is very big because medDistRatio is too small, which potentially caused by the median value with small value of outliner.
 ![alt text](/Result/TTC_Camera3.png) | TTC from Camera is negative infinity because medDistRatio == 1. Need to check medDistRatio to avoid division by zero.
 
-I created a loop in code to test all possible combinations of detectors and descriptors and saved the results in a [Excel file](https://github.com/xiaohuieddie/SFND-3D-Object-Tracking/tree/master/Result/Camera_TTC.csv).
+I created a loop in code to test all possible combinations of detectors and descriptors and saved the results in a [Excel file](/Result/Camera_TTC.csv).
 
 Here is a plot as reference: 
-![alt text](https://github.com/xiaohuieddie/SFND-3D-Object-Tracking/tree/master/Result/Plot.png)
+![alt text](/Result/Plot.png)
 
 The TOP3 detector / descriptor combinations as the best choice for our purpose of detecting keypoints on vehicles are:
 SHITOMASI/BRISK      
