@@ -135,6 +135,9 @@ CMakeFiles/3D_object_tracking.dir/src/camFusion_Student.cpp.o
  /home/workspace/SFND_3D_Object_Tracking/src/camFusion.hpp
  /home/workspace/SFND_3D_Object_Tracking/src/camFusion_Student.cpp
  /home/workspace/SFND_3D_Object_Tracking/src/dataStructures.h
+ /home/workspace/SFND_3D_Object_Tracking/src/lidarData.hpp
+ /home/workspace/SFND_3D_Object_Tracking/src/matching2D.hpp
+ /home/workspace/SFND_3D_Object_Tracking/src/objectDetection2D.hpp
  /usr/local/include/opencv4/opencv2/calib3d.hpp
  /usr/local/include/opencv4/opencv2/core.hpp
  /usr/local/include/opencv4/opencv2/core/affine.hpp
@@ -256,6 +259,8 @@ CMakeFiles/3D_object_tracking.dir/src/camFusion_Student.cpp.o
  /usr/local/include/opencv4/opencv2/videostab/ring_buffer.hpp
  /usr/local/include/opencv4/opencv2/videostab/stabilizer.hpp
  /usr/local/include/opencv4/opencv2/videostab/wobble_suppression.hpp
+ /usr/local/include/opencv4/opencv2/xfeatures2d.hpp
+ /usr/local/include/opencv4/opencv2/xfeatures2d/nonfree.hpp
 CMakeFiles/3D_object_tracking.dir/src/lidarData.cpp.o
  /home/workspace/SFND_3D_Object_Tracking/src/dataStructures.h
  /home/workspace/SFND_3D_Object_Tracking/src/lidarData.cpp

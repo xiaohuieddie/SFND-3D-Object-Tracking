@@ -134,6 +134,9 @@ CMakeFiles/3D_object_tracking.dir/src/FinalProject_Camera.cpp.o: /usr/local/incl
 CMakeFiles/3D_object_tracking.dir/src/camFusion_Student.cpp.o: ../src/camFusion.hpp
 CMakeFiles/3D_object_tracking.dir/src/camFusion_Student.cpp.o: ../src/camFusion_Student.cpp
 CMakeFiles/3D_object_tracking.dir/src/camFusion_Student.cpp.o: ../src/dataStructures.h
+CMakeFiles/3D_object_tracking.dir/src/camFusion_Student.cpp.o: ../src/lidarData.hpp
+CMakeFiles/3D_object_tracking.dir/src/camFusion_Student.cpp.o: ../src/matching2D.hpp
+CMakeFiles/3D_object_tracking.dir/src/camFusion_Student.cpp.o: ../src/objectDetection2D.hpp
 CMakeFiles/3D_object_tracking.dir/src/camFusion_Student.cpp.o: /usr/local/include/opencv4/opencv2/calib3d.hpp
 CMakeFiles/3D_object_tracking.dir/src/camFusion_Student.cpp.o: /usr/local/include/opencv4/opencv2/core.hpp
 CMakeFiles/3D_object_tracking.dir/src/camFusion_Student.cpp.o: /usr/local/include/opencv4/opencv2/core/affine.hpp
@@ -255,6 +258,8 @@ CMakeFiles/3D_object_tracking.dir/src/camFusion_Student.cpp.o: /usr/local/includ
 CMakeFiles/3D_object_tracking.dir/src/camFusion_Student.cpp.o: /usr/local/include/opencv4/opencv2/videostab/ring_buffer.hpp
 CMakeFiles/3D_object_tracking.dir/src/camFusion_Student.cpp.o: /usr/local/include/opencv4/opencv2/videostab/stabilizer.hpp
 CMakeFiles/3D_object_tracking.dir/src/camFusion_Student.cpp.o: /usr/local/include/opencv4/opencv2/videostab/wobble_suppression.hpp
+CMakeFiles/3D_object_tracking.dir/src/camFusion_Student.cpp.o: /usr/local/include/opencv4/opencv2/xfeatures2d.hpp
+CMakeFiles/3D_object_tracking.dir/src/camFusion_Student.cpp.o: /usr/local/include/opencv4/opencv2/xfeatures2d/nonfree.hpp
 
 CMakeFiles/3D_object_tracking.dir/src/lidarData.cpp.o: ../src/dataStructures.h
 CMakeFiles/3D_object_tracking.dir/src/lidarData.cpp.o: ../src/lidarData.cpp

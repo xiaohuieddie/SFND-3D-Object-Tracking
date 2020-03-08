@@ -255,9 +255,9 @@ Some examples with wrong TTC estimate of the Lidar sensor:
 
 IMAGE               | Description
 --------------------| -------------------
-![alt text](https://github.com/xiaohuieddie/SFND-3D-Object-Tracking/tree/master/Result/TTC_Lidar1.png) | TTC from Lidar is not correct because of TTC is too big compared with last frame. Need to put a filter to rationalize the calculated TTC value based on previous results from previous frames.
-![alt text](https://github.com/xiaohuieddie/SFND-3D-Object-Tracking/tree/master/Result/TTC_Lidar2.png) | TTC from Lidar is negative because estimation uses mean of all Lidar points that return minXCurr > minXPrev. Need to delete Lidar points from preceding vehicle front mirrors.
-![alt text](https://github.com/xiaohuieddie/SFND-3D-Object-Tracking/tree/master/Result/TTC_Lidar3.png) | TTC from Lidar is too small because of the outliners in between preceding vehicle and the autonomous vehicle.Need to put a filter to identify and filter them out.
+![alt text](./Result/TTC_Lidar1.png) | TTC from Lidar is not correct because of TTC is too big compared with last frame. Need to put a filter to rationalize the calculated TTC value based on previous results from previous frames.
+![alt text](/Result/TTC_Lidar2.png) | TTC from Lidar is negative because estimation uses mean of all Lidar points that return minXCurr > minXPrev. Need to delete Lidar points from preceding vehicle front mirrors.
+![alt text](/Result/TTC_Lidar3.png) | TTC from Lidar is too small because of the outliners in between preceding vehicle and the autonomous vehicle.Need to put a filter to identify and filter them out.
 
 
 #### 6. Performance Evaluation 2
@@ -268,9 +268,9 @@ Some examples with wrong TTC estimate of the Camera:
 
 IMAGE               | Description
 --------------------| -------------------
-![alt text](https://github.com/xiaohuieddie/SFND-3D-Object-Tracking/tree/master/Result/TTC_Camera1.png) | TTC from Camera is very small because medDistRatio is too big, which potentially caused by the median value with the big value of outliner.
-![alt text](https://github.com/xiaohuieddie/SFND-3D-Object-Tracking/tree/master/Result/TTC_Camera2.png) | TTC from Camera is very big because medDistRatio is too small, which potentially caused by the median value with small value of outliner.
-![alt text](https://github.com/xiaohuieddie/SFND-3D-Object-Tracking/tree/master/Result/TTC_Camera3.png) | TTC from Camera is negative infinity because medDistRatio == 1. Need to check medDistRatio to avoid division by zero.
+![alt text](/Result/TTC_Camera1.png) | TTC from Camera is very small because medDistRatio is too big, which potentially caused by the median value with the big value of outliner.
+![alt text](/Result/TTC_Camera2.png) | TTC from Camera is very big because medDistRatio is too small, which potentially caused by the median value with small value of outliner.
+![alt text](/Result/TTC_Camera3.png) | TTC from Camera is negative infinity because medDistRatio == 1. Need to check medDistRatio to avoid division by zero.
 
 I created a loop in code to test all possible combinations of detectors and descriptors and saved the results in a [Excel file](https://github.com/xiaohuieddie/SFND-3D-Object-Tracking/tree/master/Result/Camera_TTC.csv).
 
