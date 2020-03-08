@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include <string>
 #include <vector>
 #include <cmath>
 #include <limits>
@@ -22,26 +23,6 @@
 
 using namespace std;
 
-// detector function
-double Detector(string detectorType, vector<cv::KeyPoint> &keypoints, cv::Mat &imgGray, bool bVis){
-    //// -> SHITOMASI, HARRIS, FAST, BRISK, ORB, AKAZE, SIFT
-    double t;
-  	if (detectorType.compare("SHITOMASI") == 0)
-    {
-      t = detKeypointsShiTomasi(keypoints, imgGray, bVis);
-    }
-    else if (detectorType.compare("HARRIS") == 0)
-    {
-      t = detKeypointsHarris(keypoints, imgGray, bVis);
-    }
-    else
-    {
-      t = detKeypointsModern(keypoints, imgGray, detectorType, bVis);
-    }
-  
-  	return t;
-}
-
 /* MAIN PROGRAM */
 int main(int argc, const char *argv[])
 {
@@ -51,8 +32,11 @@ int main(int argc, const char *argv[])
     string dataPath = "../";
 
   	//
-  	string detectorType = "SHITOMASI";
-  	string descriptorType = "BRISK"; // BRISK, BRIEF, ORB, FREAK, AKAZE, SIFT
+  	// detector and descriptor type
+	vector<string> detectorType_list{"SHITOMASI", "HARRIS", "FAST", "BRISK", "ORB", "AKAZE", "SIFT"};
+  	vector<string> descriptorType_list{"BRISK", "BRIEF", "ORB", "FREAK", "AKAZE", "SIFT"};
+  	string detectorType = "HARRIS";
+  	string descriptorType = "FREAK"; // BRISK, BRIEF, ORB, FREAK, AKAZE, SIFT
   	string matcherType = "MAT_BF";        // MAT_BF, MAT_FLANN
   	string descriptorType_i = "DES_HOG"; // DES_BINARY, DES_HOG
   	string selectorType = "SEL_NN";       // SEL_NN, SEL_KNN
@@ -101,8 +85,12 @@ int main(int argc, const char *argv[])
     vector<DataFrame> dataBuffer; // list of data frames which are held in memory at the same time
     bool bVis = false;            // visualize results
 
+    // Log Data
+    bool data_save = true;
+  	//DataLog(detectorType_list, descriptorType_list, imgStartIndex, imgEndIndex, imgStepWidth, data_save);
+  
+  
     /* MAIN LOOP OVER ALL IMAGES */
-
     for (size_t imgIndex = 0; imgIndex <= imgEndIndex - imgStartIndex; imgIndex+=imgStepWidth)
     {
         /* LOAD IMAGE INTO BUFFER */
@@ -142,15 +130,11 @@ int main(int argc, const char *argv[])
 
         // remove Lidar points based on distance properties
         float minZ = -1.5, maxZ = -0.9, minX = 2.0, maxX = 20.0, maxY = 2.0, minR = 0.1; // focus on ego lane
-        cropLidarPoints(lidarPoints, minX, maxX, maxY, minZ, maxZ, minR);
-    
+        cropLidarPoints(lidarPoints, minX, maxX, maxY, minZ, maxZ, minR);   
         (dataBuffer.end() - 1)->lidarPoints = lidarPoints;
-
         cout << "#3 : CROP LIDAR POINTS done" << endl;
 
-
         /* CLUSTER LIDAR POINT CLOUD */
-
         // associate Lidar points with camera-based ROI
         float shrinkFactor = 0.10; // shrinks each bounding box by the given percentage to avoid 3D object merging at the edges of an ROI
         clusterLidarWithROI((dataBuffer.end()-1)->boundingBoxes, (dataBuffer.end() - 1)->lidarPoints, shrinkFactor, P_rect_00, R_rect_00, RT);
@@ -176,10 +160,8 @@ int main(int argc, const char *argv[])
         cv::cvtColor((dataBuffer.end()-1)->cameraImg, imgGray, cv::COLOR_BGR2GRAY);
 
         // extract 2D keypoints from current image
-        vector<cv::KeyPoint> keypoints; // create empty feature list for current image
-        
-      	double t1 = Detector(detectorType, keypoints, imgGray, bVis);
-      	
+        vector<cv::KeyPoint> keypoints; // create empty feature list for current image        
+      	double t1 = Detector(detectorType, keypoints, imgGray, bVis);      	
 
         // optional : limit number of keypoints (helpful for debugging and learning)
         bool bLimitKpts = false;
@@ -202,24 +184,17 @@ int main(int argc, const char *argv[])
 
 
         /* EXTRACT KEYPOINT DESCRIPTORS */
-
         cv::Mat descriptors;
       	double t2 = descKeypoints((dataBuffer.end() - 1)->keypoints, (dataBuffer.end() - 1)->cameraImg, descriptors, descriptorType);
 
         // push descriptors for current frame to end of data buffer
         (dataBuffer.end() - 1)->descriptors = descriptors;
-      	
-
         cout << "#6 : EXTRACT DESCRIPTORS done" << endl;
-
 
         if (dataBuffer.size() > 1) // wait until at least two images have been processed
         {
-
             /* MATCH KEYPOINT DESCRIPTORS */
-
             vector<cv::DMatch> matches;
-
             matchDescriptors((dataBuffer.end() - 2)->keypoints, (dataBuffer.end() - 1)->keypoints,
                              (dataBuffer.end() - 2)->descriptors, (dataBuffer.end() - 1)->descriptors,
                              matches, descriptorType_i, matcherType, selectorType);
@@ -227,7 +202,6 @@ int main(int argc, const char *argv[])
             // store matches in current data frame
             (dataBuffer.end() - 1)->kptMatches = matches;
           	cout<< "Number of matched keypoints identified for the preceding vehicle:" << matches.size() << endl;
-
             cout << "#7 : MATCH KEYPOINT DESCRIPTORS done" << endl;
 
             
@@ -300,7 +274,7 @@ int main(int argc, const char *argv[])
                         
                         char str[200];
                         sprintf(str, "TTC Lidar : %f s, TTC Camera : %f s", ttcLidar, ttcCamera);
-                        putText(visImg, str, cv::Point2f(80, 50), cv::FONT_HERSHEY_PLAIN, 2, cv::Scalar(0,0,255));
+                        putText(visImg, str, cv::Point2f(80, 50), cv::FONT_HERSHEY_PLAIN, 2, cv::Scalar(0,255,0));
 
                         string windowName = "Final Results : TTC";
                         cv::namedWindow(windowName, 4);

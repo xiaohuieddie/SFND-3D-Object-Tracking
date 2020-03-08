@@ -275,3 +275,24 @@ double detKeypointsModern(vector<cv::KeyPoint> &keypoints, cv::Mat &img, string 
   	return 1000 * t / 1.0;
       
 }
+
+/*
+double Detector(std::string detectorType, std::vector<cv::KeyPoint> &keypoints, cv::Mat &imgGray, bool bVis){
+    //// -> SHITOMASI, HARRIS, FAST, BRISK, ORB, AKAZE, SIFT
+    double t;
+  	if (detectorType.compare("SHITOMASI") == 0)
+    {
+      t = detKeypointsShiTomasi(keypoints, imgGray, bVis);
+    }
+    else if (detectorType.compare("HARRIS") == 0)
+    {
+      t = detKeypointsHarris(keypoints, imgGray, bVis);
+    }
+    else
+    {
+      t = detKeypointsModern(keypoints, imgGray, detectorType, bVis);
+    }
+  
+  	return t;
+}
+*/
